@@ -34,6 +34,6 @@
   </include>
 
   <include file="$(find diff_robot)/launch/includes/move_base.launch.xml"/>
-  <node type = 'rviz' name = 'rviz' pkg='rviz'   output ="screen"/>
+  <node type = 'rviz' name = 'rviz' pkg='rviz'   output ="screen" respawn="false" args="d- $(find diff_robot)/rviz/map.rviz" />
 </launch>
 

@@ -248,8 +248,8 @@
   </gazebo>
 
 
-  <xacro:wheels fb="front" lr="right" parent="base_link" translateX="0" translateY="0.5" flipY="1"/>
-  <xacro:wheels fb="front" lr="left" parent="base_link" translateX="0" translateY="-0.5" flipY="1"/>
+  <xacro:wheels fb="front" lr="left" parent="base_link" translateX="0" translateY="0.5" flipY="1"/>
+  <xacro:wheels fb="front" lr="right" parent="base_link" translateX="0" translateY="-0.5" flipY="1"/>
 
   
   <!-- Differential drive controller  -->

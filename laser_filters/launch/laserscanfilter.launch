@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="laser_filters" type="scan_to_scan_filter_chain"
+      name="laser_filter">
+    <rosparam command="load" file="$(find laser_filters)/params/laserscanfilter.yaml" />
+    <remap from="scan" to="scan" />
+    
+  </node>
+  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find diff_robot)/rviz/laser.rviz"/>
+</launch>

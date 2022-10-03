@@ -46,5 +46,5 @@
     <remap from="scan" to="$(arg scan_topic)"/>
   </node>
   <include file="$(find diff_robot)/launch/includes/move_base.launch.xml"/>
-<node type = 'rviz' name = 'rviz' pkg='rviz'   output ="screen"/>
+  <node type = 'rviz' name = 'rviz' pkg='rviz' output ="screen" args="-d $(find diff_robot)/rviz/map.rviz"/>
 </launch>

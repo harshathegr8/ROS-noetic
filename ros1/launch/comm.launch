@@ -1,0 +1,9 @@
+<launch>
+  <arg name='delay1' default='5'/>
+  <arg name='delay2' default='10' />
+  <arg name='delay3' default='15' />
+  <arg name='time' default='5000' />
+  <node name="talker" pkg="ros1" type="talker.py" output="screen" launch-prefix="bash -c 'sleep $(arg delay1); $0 $@' "/>
+  <node name='listener1' pkg='ros1' type='list2.py' output="screen" launch-prefix="bash -c 'sleep $(arg delay2); $0 $@' "/>
+  <node name='listener2' pkg='ros1' type='listener.py' output="screen" launch-prefix="bash -c 'sleep $(arg delay3); $0 $@' "/>
+</launch>

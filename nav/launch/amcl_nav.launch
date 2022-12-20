@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<launch>
+	<include file="$(find diff_robot)/launch/laser_robo.launch"/>
+	<include file="$(find diff_robot)/launch/amcl.launch"/>
+	<include file="$(find laser_filters)/launch/my_laser_filter.launch"/>
+	<node name="rqt_graph" type = "rqt_graph" pkg="rqt_graph"/>
+</launch>

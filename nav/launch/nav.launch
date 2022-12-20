@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+	<include file="$(find diff_robot)/launch/lsmz.launch"/>
+	<include file="$(find laser_filters)/launch/my_laser_filter.launch"/>
+	<include file="$(find diff_robot)/launch/gmapping.launch"/>
+	
+	<node name="nav" type="robot_nav.py" pkg = "navigation" output ="screen"/>
+	
+</launch>

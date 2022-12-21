@@ -1,14 +1,11 @@
 <?xml version="1.0"?>
 <launch>
-	<arg name='delay1' default='2'/>
+	<arg name='delay1' default='3'/>
 	<include file="$(find diff_robot)/launch/laser_robo.launch">
 		<arg name="world" value="$(find maps)/Worlds/Map3.world"/>
 	</include>
 	<include file="$(find laser_filters)/launch/my_laser_filter.launch"/>
-	<include file="$(find diff_robot)/launch/gmapping.launch">
-		<arg name="mov_b" value='false'/>
-	</include>
-	
-	<node name="nav" type="robot_nav.py" pkg = "nav" output ="screen"/>
+	<include file="$(find diff_robot)/launch/gmapping.launch"/>
+	<include file="$(find rrt_exploration)/launch/simple.launch"/>
 	<node name="rqt_graph" type = "rqt_graph" pkg="rqt_graph" launch-prefix="bash -c 'sleep $(arg delay1); $0 $@' "/>
 </launch>

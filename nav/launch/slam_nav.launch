@@ -1,9 +1,16 @@
 <?xml version="1.0"?>
 <launch>
+	<arg name='delay1' default='3'/>
+	<arg name="plan" default="car" />
+	<arg name="st" default = "scan_filtered"/>
 	<include file="$(find diff_robot)/launch/laser_robo.launch"/>
 	<include file="$(find laser_filters)/launch/my_laser_filter.launch"/>
-	<include file="$(find diff_robot)/launch/gmapping.launch"/>
+	<include file="$(find diff_robot)/launch/gmapping.launch">
+		<arg name="scan_topic" value="$(arg st)" />
+		<arg name="mov_b" value="true" />
+		<arg name="plan" value="$(arg plan)" />
+	</include>
 	
 	<node name="keyboard" type="teleop_keyboard.py" pkg = "keys" output ="screen"/>
-	
+	<node name="rqt_graph" type = "rqt_graph" pkg="rqt_graph" launch-prefix="bash -c 'sleep $(arg delay1); $0 $@' "/>
 </launch>

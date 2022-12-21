@@ -9,15 +9,20 @@
 -->
 
   <arg name="odom_topic" default="odom" />
-
+  <arg name="plan" default="dwa" />
+  <arg name="p1" default="#" />
+  <arg name="p2" default="#" />
+  <arg name="p3" default="#" />
+  <arg name="p4" default="#" />
+  
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <rosparam file="$(find diff_robot)/param/cc.yaml" command="load" ns="global_costmap" />
     <rosparam file="$(find diff_robot)/param/cc.yaml" command="load" ns="local_costmap" />
     <rosparam file="$(find diff_robot)/param/local_costmap_params.yaml" command="load" />
     <rosparam file="$(find diff_robot)/param/global_costmap_params.yaml" command="load" />
     <rosparam file="$(find diff_robot)/param/base_local_planner_params.yaml" command="load" />
-    <rosparam file="$(find diff_robot)/param/dwa_local_planner_params.yaml" command="load" />
-    <rosparam file="$(find diff_robot)/param/move_base_params.yaml" command="load" />
+    <rosparam file="$(find diff_robot)/param/$(arg plan)_local_planner_params.yaml" command="load"/>
+    <rosparam file="$(find diff_robot)/param/move_base_params.yaml" command="load" subst_value="true"/>
 
 <!--
     <remap from="cmd_vel" to="navigation_velocity_smoother/raw_cmd_vel"/>

@@ -8,7 +8,8 @@
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
   <arg name="world" default="$(find maps)/Worlds/Map1.world"/>
-
+  <arg name="robot" default="$(find diff_robot)/urdf/diff_wheeled_robot_with_laser.xacro"/>
+  <arg name="viv" default = "false"/>
 <!-- urdf xml robot description loaded on the Parameter Server-->  
 
   
@@ -17,7 +18,9 @@
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen" >
     <param name="publish_frequency" type="double" value="50.0" />
   </node>
-  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find diff_robot)/urdf/diff_wheeled_robot_with_laser.xacro'" /> 
+  <param name="robot_description" command="$(find xacro)/xacro $(arg robot) viv:=$(arg viv)"  >
+  	
+  </param> 
   <!-- We resume the logic in empty_world.launch -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(arg world)"/>

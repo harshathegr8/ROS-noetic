@@ -14,26 +14,46 @@
 -->
 
   <!-- Map server -->
+  
   <arg name="map_file" default="$(find maps)/local_maps/map1.yaml"/>
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
-
+  <arg name="plan" default="dwa"/>
   <arg name="initial_pose_x" default="0.0"/> <!-- Use 17.0 for willow's map in simulation -->
   <arg name="initial_pose_y" default="0.0"/> <!-- Use 17.0 for willow's map in simulation -->
   <arg name="initial_pose_a" default="0.0"/>
+  <arg name="scan_topic"     default="scan"/>
   <include file="$(find diff_robot)/launch/includes/amcl.launch.xml">
     
     <arg name="initial_pose_x" value="0"/>
     <arg name="initial_pose_y" value="0"/>
     <arg name="initial_pose_a" value="0"/> 	
-
+    <arg name="scan_topic"     value="$(arg scan_topic)"/>
 <!--
     <arg name="initial_pose_x" value="$(arg initial_pose_x)"/>
     <arg name="initial_pose_y" value="$(arg initial_pose_y)"/>
     <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
 -->
   </include>
-
-  <include file="$(find diff_robot)/launch/includes/move_base.launch.xml"/>
-  <node  name = 'rviz' pkg='rviz' type = 'rviz'  args="-d $(find diff_robot)/rviz/map.rviz"/>
+  <group if="$(eval arg('plan')=='dwa')">
+  	<include file="$(find diff_robot)/launch/includes/move_base.launch.xml">
+  		<arg name='plan' value='$(arg plan)'/>
+  		<arg name="p1" value="" />
+  	</include>
+  </group>
+  <group if="$(eval arg('plan')=='ppa')">
+  	<include file="$(find diff_robot)/launch/includes/move_base.launch.xml">
+  		<arg name='plan' value='$(arg plan)'/>
+  		<arg name="p2" value="" />
+  	</include>
+  </group>
+  <group if="$(eval arg('plan')=='car')">
+  	<include file="$(find diff_robot)/launch/includes/move_base.launch.xml">
+  		<arg name='plan' value='$(arg plan)'/>
+  		<arg name="p3" value="" />
+  	</include>
+  </group>
+  
+  
+  <node  name = 'rviz' pkg='rviz' type = 'rviz'  args="-d $(find diff_robot)/rviz/$(arg plan)map.rviz"/>
 </launch>
 

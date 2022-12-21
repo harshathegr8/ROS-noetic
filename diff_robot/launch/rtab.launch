@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<launch>
+	
+	<include file="$(find diff_robot)/launch/laser_robo.launch"/>
+	<remap from="/jn0/base_scan" to="/scan"/>
+	<remap from="/data_throttled_image/compressed" to="/camera/rgb/image_raw/compressed" />
+	<remap from="/data_throttled_image_depth/compressedDepth" to="/camera/rgb/image_raw/compressedDepth" />
+	<remap from="data_throttled_camera_info" to="/camera/rgb/camera_info"/>
+	<include file="$(find rtabmap_ros)/launch/demo/demo_robot_mapping.launch">
+		<arg name="rtabmapviz" value="false"/>
+		<arg name="rviz" value="true"/>
+		
+	</include>
+	<node type="rqt_graph" name="rqt_graph" pkg="rqt_graph" />
+</launch>

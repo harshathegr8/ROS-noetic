@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<launch>
+	
+	<include file="$(find diff_robot)/launch/laser_robo.launch">
+		<arg name="world" value="$(find maps)/Worlds/Map1.world"/>
+		<arg name="robot" value = "$(find diff_robot)/urdf/diff_robot_2cam.xacro"/>
+	</include>
+	<include file="$(find rtabmap_ros)/launch/stereo_mapping.launch">
+		<arg name="frame_id" value="camera_link_optical"/>
+		<arg name="stereo_namespace"               value="/camera" />
+		<arg name="left_image_topic"  value="/camera/rgb/image_raw1" />
+		<arg name="right_image_topic"  value="/camera/rgb/image_raw2" />
+		<arg name="left_camera_info_topic"  value="/camera/rgb/camera_info1" />
+		<arg name="right_camera_info_topic"  value="/camera/rgb/camera_info22" />
+		<arg name="rtabmapviz" value="false"/>
+		<arg name="rviz" value="true"/>
+	</include>
+	<node type="teleop_keyboard.py" name="teleop" pkg="keys"/>
+	<node type="rqt_graph" name="rqt_graph" pkg="rqt_graph" />
+</launch>
+
+
+
+

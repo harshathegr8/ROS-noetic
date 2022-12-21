@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<launch>
+	
+	<include file="$(find diff_robot)/launch/laser_robo.launch">
+		<arg name="world" value="$(find maps)/Worlds/office_earthquake.world"/>
+		<arg name="robot" value = "$(find diff_robot)/urdf/diff_robot_1cam.xacro"/>
+	</include>
+	<include file="$(find rtabmap_ros)/launch/rgbd_mapping.launch">
+		<arg name="frame_id" value="camera_link_optical"/>
+		<arg name="rgb_topic"               value="/camera/rgb/image_raw" />
+		<arg name="depth_registered_topic"  value="/camera/depth/image_raw" />
+		<arg name="rtabmapviz" value="false"/>
+		<arg name="rviz" value="true"/>
+	</include>
+	<node type="teleop_keyboard.py" name="teleop" pkg="keys"/>
+	<node type="rqt_graph" name="rqt_graph" pkg="rqt_graph" />
+</launch>
+
+
+
+

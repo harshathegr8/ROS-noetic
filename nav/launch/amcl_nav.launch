@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <launch>
 	<arg name='delay1' default='3'/>
-	<arg name="plan" default="car" />
-	<arg name="st"     default="scan"/>
+	<arg name="plan" default="dwa" />
+	<arg name="st"     default="scan_filtered"/>
 	<arg name="vl" default = "false"/>
 	<include file="$(find diff_robot)/launch/laser_robo.launch">
 		<arg name="viv" value="$(arg vl)"/>
